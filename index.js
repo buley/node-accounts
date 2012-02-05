@@ -1,1 +1,1 @@
-import('./lib/accounts.js');
+require('./lib/accounts.js');
