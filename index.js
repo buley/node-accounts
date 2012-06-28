@@ -1,1 +1,1 @@
-require('./lib/accounts.js');
+module.exports = require('./lib/accounts.js');
