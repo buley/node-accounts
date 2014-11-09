@@ -1,0 +1,22 @@
+{
+  "name": "node-accounts",
+  "version": "0.0.0",
+  "description": "oAuth service for popular social services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buley/node-accounts.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buley/node-accounts/issues"
+  },
+  "homepage": "https://github.com/buley/node-accounts",
+  "dependencies": {
+    "oauth": "^0.9.12"
+  }
+}
