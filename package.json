@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/buley/node-accounts.git"
+    "url": "https://github.com/mcnaughton/node-accounts.git"
   },
   "author": "",
   "license": "None",
   "bugs": {
-    "url": "https://github.com/buley/node-accounts/issues"
+    "url": "https://github.com/mcnaughton/node-accounts/issues"
   },
-  "homepage": "https://github.com/buley/node-accounts",
+  "homepage": "https://github.com/mcnaughton/node-accounts",
   "dependencies": {
     "oauth": "^0.9.12"
   }
