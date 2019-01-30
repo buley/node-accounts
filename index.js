@@ -4611,11 +4611,23 @@ Public.prototype.secrets = function(path) {
         throw new Error('Keypath cannot be empty');
     }
 
-    var auth_keys = ('string' === typeof path) ? fs.readFileSync(path, 'utf8') : path;
+    var auth_keys = ('string' === typeof path) ? fs.readFileSync(path, 'utf8') : path,
+        twitter = auth_keys.twitter,
+        facebook = auth_keys.facebook,
+        google = auth_keys.google,
+        yahoo = auth_keys.yahoo,
+        soundcloud = auth_keys.soundcloud,
+        wordpress = auth_keys.wordpress,
+        youtube = auth_keys.youtube,
+        blogger = auth_keys.blogger,
+        foursquare = auth_keys.foursquare,
+        github = auth_keys.github,
+        linkedin = auth_keys.linkedin,
+        evernote = auth_keys.evernote,
+        instagram = auth_keys.instagram,
+        vimeo = auth_keys.vimeo,
+        reddit = auth_keys.reddit;
 
-    for (var key in auth_keys) {
-        global[key] = auth_keys[key];
-    }
 
     // Twitter (oAuth 1.0)
     if (!!twitter) {
