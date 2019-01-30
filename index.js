@@ -4558,7 +4558,7 @@ Public.prototype.secrets = function( path ) {
 		throw new Error( 'Keypath cannot be empty' );
 	}
 
-	var auth_keys = ( 'string' === typeof path ) ? require( path ) : path; 
+	var auth_keys = ( 'string' === typeof path ) ? fs.readFileSync(path, 'utf8') : path; 
 
 	for( var key in auth_keys ) { 
 		global[ key ]= auth_keys[ key ]; 
