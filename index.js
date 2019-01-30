@@ -4626,6 +4626,7 @@ Public.prototype.secrets = function(path) {
         evernote = auth_keys.evernote,
         instagram = auth_keys.instagram,
         vimeo = auth_keys.vimeo,
+        tumblr = auth_keys.tumblr,
         reddit = auth_keys.reddit;
 
 
