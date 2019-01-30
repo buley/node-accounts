@@ -4567,80 +4567,114 @@ Public.prototype.secrets = function( path ) {
 	}
 
 	// Twitter (oAuth 1.0)
-	service.twitter = new OAuth("https://api.twitter.com/oauth/request_token", "https://api.twitter.com/oauth/access_token", twitter.id, twitter.secret, "1.0", twitter.callback || null, "HMAC-SHA1");
+	if (!!twitter) {
+		service.twitter = new OAuth("https://api.twitter.com/oauth/request_token", "https://api.twitter.com/oauth/access_token", twitter.id, twitter.secret, "1.0", twitter.callback || null, "HMAC-SHA1");
+	}
 
     // Facebook (oAuth 2)
-	service.facebook = new OAuth2( facebook.id, facebook.secret, "https://graph.facebook.com" );
-	service.facebook.setAccessTokenName( facebook.token || "oauth_token");
+	if (!!facebook) {
+		service.facebook = new OAuth2( facebook.id, facebook.secret, "https://graph.facebook.com" );
+		service.facebook.setAccessTokenName( facebook.token || "oauth_token");
+	}
 
 	// Google (oAuth 2)
-	service.google = new OAuth2( google.id, google.secret,  "", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token" );
-	service.google.setAccessTokenName( google.token || "oauth_token" );
-    service.google.useAuthorizationHeaderforGET( true );
+	if (!!google) {
+		service.google = new OAuth2( google.id, google.secret,  "", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token" );
+		service.google.setAccessTokenName( google.token || "oauth_token" );
+    		service.google.useAuthorizationHeaderforGET( true );
+	}
 
     // YouTube (oAuth 2)
-    service.youtube = new OAuth2( youtube.id, youtube.secret,  "", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token" );
-    service.youtube.setAccessTokenName( youtube.token || "oauth_token" );
-    service.youtube.useAuthorizationHeaderforGET( true );
+	if (!!youtube)) {
+		    service.youtube = new OAuth2( youtube.id, youtube.secret,  "", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token" );
+		    service.youtube.setAccessTokenName( youtube.token || "oauth_token" );
+		    service.youtube.useAuthorizationHeaderforGET( true );
+	}
 
     // Blogger (oAuth 2)
+	if (!!blogger) {
     service.blogger = new OAuth2( blogger.id, blogger.secret,  "", "https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token" );
     service.blogger.setAccessTokenName( blogger.token || "oauth_token" );
     service.blogger.useAuthorizationHeaderforGET( true );
+	}
 
 	// Foursquare (oAuth 2)
+	if (!!foursquare) {
 	service.foursquare = new OAuth2( foursquare.id, foursquare.secret, "https://foursquare.com", "/oauth2/authenticate", "/oauth2/access_token", "HMAC-SHA1" );
 	service.foursquare.setAccessTokenName( foursquare.token || "oauth_token" );
+	}
 
 	// Tumblr (oauth 1.0)
+	if (!!tumblr) {
 	service.tumblr = new OAuth( "http://www.tumblr.com/oauth/request_token", "http://www.tumblr.com/oauth/access_token", tumblr.id, tumblr.secret, "1.0", tumblr.callback || '', "HMAC-SHA1" );
+	}
 
 	// Github (oAuth 2)
+	if (!!github) {
 	service.github = new OAuth2( github.id, github.secret, "https://github.com", "/login/oauth/authorize", "/login/oauth/access_token", { 'User-Agent': 'republish.co (@editor)' } );
 	service.github.setAccessTokenName( github.token || "oauth_token" );
+	}
 
 	// Yahoo (oauth 1.0)
+	if (!!yahoo) {
 	service.yahoo = new OAuth( "https://api.login.yahoo.com/oauth/v2/get_request_token", "https://api.login.yahoo.com/oauth/v2/get_token", yahoo.id, yahoo.secret, "1.0", yahoo.callback || null, "HMAC-SHA1" );
+	}
 
 	// Linkedin (oauth 1.0)
+	if (!!linkedin) {
 	service.linkedin = new OAuth( "https://api.linkedin.com/uas/oauth/requestToken", "https://api.linkedin.com/uas/oauth/accessToken", linkedin.id, linkedin.secret, "1.0", linkedin.callback || null, "HMAC-SHA1", null, { 'x-li-format': 'json' } );
+	}
 
 	// Windows Live (oAuth 2)
+	if (!!windows) {
 	service.windows = new OAuth2( windows.id, windows.secret, "https://oauth.live.com", "/authorize", "/token" );
 	service.windows.setAccessTokenName( windows.token || "oauth_token");
+	}
 
     // Instagram (oAuth 2)
+	if (!!instagram) {
     service.instagram = new OAuth2( instagram.id, instagram.secret, "https://api.instagram.com", "/oauth/authorize", "/oauth/access_token" );
     service.instagram.setAccessTokenName( instagram.token || "oauth_token");
+	}
 
     // WordPress (oAuth 2)
+	if (!!wordpress) {
     service.wordpress = new OAuth2( wordpress.id, wordpress.secret, "https://public-api.wordpress.com", "/oauth2/authorize", "/oauth2/token" );
     service.wordpress.setAccessTokenName( wordpress.token || "oauth_token");
     service.wordpress.useAuthorizationHeaderforGET( true );
+	}
 
     // Vimeo (oAuth 2)
+	if (!!vimeo) {
     service.vimeo = new OAuth2( vimeo.id, vimeo.secret, "https://api.vimeo.com", "/oauth/authorize", "/oauth/access_token" );
     service.vimeo.setAccessTokenName( vimeo.token || "oauth_token");
     service.vimeo.useAuthorizationHeaderforGET( true );
+	}
 
     // Reddit (oauth 2.0)
-    var authBuff = new Buffer("" + reddit.id + ":" + reddit.secret);
-    service.reddit = new OAuth2( reddit.id, reddit.secret, "https://ssl.reddit.com", "/api/v1/authorize", "/api/v1/access_token", {
-        'Authorization': "Basic " + authBuff.toString('base64')
-    } );
+	if (!!reddit) {
+	    var authBuff = new Buffer("" + reddit.id + ":" + reddit.secret);
+	    service.reddit = new OAuth2( reddit.id, reddit.secret, "https://ssl.reddit.com", "/api/v1/authorize", "/api/v1/access_token", {
+		'Authorization': "Basic " + authBuff.toString('base64')
+	    } );
 
-    service.reddit.setAccessTokenName( reddit.token || "oauth_token");
-    service.reddit.useAuthorizationHeaderforGET( true );
+	    service.reddit.setAccessTokenName( reddit.token || "oauth_token");
+	    service.reddit.useAuthorizationHeaderforGET( true );
 
+	}
     //SoundCloud (OAuth2)
     //https://developers.soundcloud.com/docs/api/reference
+	if (!!soundcloud) {
     service.soundcloud = new OAuth2( soundcloud.id, soundcloud.secret, "https://api.soundcloud.com", "/connect", "/oauth2/token" );
     service.soundcloud.setAccessTokenName( soundcloud.token || "oauth_token");
     service.soundcloud.useAuthorizationHeaderforGET( true );
+	}
 
 	//TODO: Evernote
     // Evernote (oauth 1.0)
+	if (!!evernote) {
     //service.evernote = new OAuthEcho( "https://sandbox.evernote.com/oauth", "https://sandbox.evernote.com/oauth", evernote.id, evernote.secret, "1.0a", evernote.callback || '', "HMAC-SHA1" );
+	}}
 };
 
 
