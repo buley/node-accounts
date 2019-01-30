@@ -1,6 +1,6 @@
 {
   "name": "node-accounts",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "oAuth service for popular social services.",
   "main": "index.js",
   "scripts": {

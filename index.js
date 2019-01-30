@@ -4620,6 +4620,7 @@ Public.prototype.secrets = function(path) {
         wordpress = auth_keys.wordpress,
         youtube = auth_keys.youtube,
         blogger = auth_keys.blogger,
+        windows = auth_keys.windows,
         foursquare = auth_keys.foursquare,
         github = auth_keys.github,
         linkedin = auth_keys.linkedin,
