@@ -764,9 +764,7 @@ Private.handle_evernote = function(params, callback) {
 
         });
     } else {
-        console.log('evernote aouth request token');
         service.evernote.getOAuthRequestToken(function(error, oauth_request_token, oauth_request_token_secret, oauth_authorize_url, additionalParameters) {
-            console.log('evernote oauth', error, oauth_request_token, oauth_request_token_secret, oauth_authorize_url, additionalParameters);
             if (error) {
 
                 Private.destroySession();
@@ -1412,7 +1410,6 @@ Private.handle_tumblr = function(params, callback) {
 /* Vimeo */
 
 Private.handle_vimeo = function(params, callback) {
-    console.log('handle_vimeo', params);
     if (params && 'logout' === params.action) {
 
         Private.destroySession()
@@ -1620,18 +1617,14 @@ Private.handle_vimeo = function(params, callback) {
 
     } else if (params && params.code) {
 
-        console.log("AUTH CODE", params.code, typeof callback);
-
         service.vimeo.getOAuthAccessToken(params.code, {
             'grant_type': 'authorization_code',
             'code': params.code,
             'redirect_uri': vimeo.callback
         }, function(error, access_token, refresh_token) {
 
-            console.log("GOT TOKEN", error, access_token, refresh_token);
-
             if (error) {
-                console.log("VIMEO ERROR", error);
+
                 Private.destroySession();
 
                 Private.publish('unauthorized', {
@@ -1700,8 +1693,6 @@ Private.handle_vimeo = function(params, callback) {
 
         });
     } else {
-
-        console.log("AUTH URL VIM", vimeo.callback, vimeo.id);
 
         var redirect_url = service.vimeo.getAuthorizeUrl({
             redirect_uri: vimeo.callback,
@@ -2233,7 +2224,6 @@ Private.handle_facebook = function(params, callback) {
         });
 
     } else if (params && (!!params.code || params.error_reason === 'user_denied')) {
-        console.log("FB", params);
         if (params.error_reason == 'user_denied') {
 
             Private.publish('unauthorized', {
@@ -2310,8 +2300,6 @@ Private.handle_facebook = function(params, callback) {
         }
 
     } else {
-
-        console.log("FACEBOOK ACTION WAS WHAT", params);
 
         var redirect_url = service.facebook.getAuthorizeUrl({
             redirect_uri: facebook.callback,
@@ -2576,10 +2564,7 @@ Private.handle_instagram = function(params, callback) {
             service.instagram._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
                 if (error) {
-                    console.log("instagram ERROR", error);
                     success = false;
-                } else {
-                    console.log("instagram DATA", data);
                 }
 
                 try {
@@ -2606,10 +2591,7 @@ Private.handle_instagram = function(params, callback) {
             service.instagram._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
                 if (error) {
-                    console.log("instagram ERROR", error);
                     success = false;
-                } else {
-                    console.log("instagram DATA", data);
                 }
 
                 try {
@@ -2637,9 +2619,6 @@ Private.handle_instagram = function(params, callback) {
 
                 if (error) {
                     success = false;
-                    console.log("instagram ERROR", error);
-                } else {
-                    console.log("instagram DATA", data);
                 }
 
                 try {
@@ -2867,7 +2846,6 @@ Private.handle_github = function(params, callback) {
 
             service.github._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
-                console.log('github proxy', url, error, typeof data);
                 if (error) {
                     success = false;
                 }
@@ -2894,10 +2872,8 @@ Private.handle_github = function(params, callback) {
             service.github._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
                 if (error) {
-                    console.log("github ERROR", error);
                     success = false;
                 } else {
-                    console.log("github DATA", data);
                 }
 
                 try {
@@ -2924,11 +2900,8 @@ Private.handle_github = function(params, callback) {
             service.github._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
                 if (error) {
-                    console.log("github ERROR", error);
                     success = false;
-                } else {
-                    console.log("github DATA", data);
-                }
+                } 
 
                 try {
                     var parsed = JSON.parse(data);
@@ -2954,11 +2927,8 @@ Private.handle_github = function(params, callback) {
             service.github._request(method, url, headers, body, oauth_token, function(error, data, result) {
 
                 if (error) {
-                    console.log("github ERROR", error);
                     success = false;
-                } else {
-                    console.log("github DATA", data);
-                }
+                } 
 
                 try {
                     var parsed = JSON.parse(data);
@@ -3145,7 +3115,6 @@ Private.handle_wordpress = function(params, callback) {
         if ('GET' === method) {
 
             service.wordpress._request(method, url, headers, body, oauth_token, function(error, data, result) {
-                console.log('proxy wordpress', url, error, typeof data);
                 if (error) {
                     success = false;
                 }
@@ -3410,7 +3379,6 @@ Private.handle_soundcloud = function(params, callback) {
         if ('GET' === method) {
 
             service.soundcloud._request(method, url, headers, body, oauth_token, function(error, data, result) {
-                console.log('proxy soundcloud', url, error, typeof data);
                 if (error) {
                     success = false;
                 }
@@ -3572,7 +3540,6 @@ Private.handle_soundcloud = function(params, callback) {
 
                 } else {
                     service.soundcloud.get("https://api.soundcloud.com/me.json?oauth_token=" + access_token, access_token, function(error, data, response) {
-                        console.log("SOUND", error, data);
                         if (error) {
 
                             Private.publish('unauthorized', {
@@ -3682,7 +3649,6 @@ Private.handle_google = function(params, callback) {
         if ('GET' === method) {
 
             service.google._request(method, url, headers, body, oauth_token, function(error, data, result) {
-                console.log('google proxy', url, error, typeof data);
                 if (error) {
                     success = false;
                 }
@@ -4094,7 +4060,6 @@ Private.handle_youtube = function(params, callback) {
                 redirect_uri: youtube.callback,
                 grant_type: 'authorization_code'
             }, function(error, access_token, refresh_token) {
-                console.log('youtube got access', error, access_token, refresh_token);
                 if (error) {
 
                     Private.publish('unauthorized', {
@@ -4112,7 +4077,6 @@ Private.handle_youtube = function(params, callback) {
                     });
 
                 } else {
-                    console.log('getting own channels on youtube', access_token);
                     service.youtube.get("https://www.googleapis.com/youtube/v3/channels?part=contentDetails,topicDetails,statistics,snippet,id,status&mine=true", access_token, function(error, data) {
                         if (error) {
 
@@ -4456,7 +4420,6 @@ Private.handle_foursquare = function(params, callback) {
         });
 
     } else if (params && (params.code || params.error_reason === 'user_denied')) {
-        console.log("FOURSQUARE", params);
         if (params.error_reason == 'user_denied') {
 
             Private.publish('unauthorized', {
@@ -4472,12 +4435,10 @@ Private.handle_foursquare = function(params, callback) {
             });
 
         } else if (params) {
-            console.log("4sq acc");
             service.foursquare.getOAuthAccessToken(params.code, {
                 redirect_uri: foursquare.callback,
                 'grant_type': 'authorization_code'
             }, function(error, access_token, refresh_token) {
-                console.log("FOURSQUARE ", error, access_token, refresh_token)
                 if (error) {
 
                     Private.publish('unauthorized', {
@@ -4499,9 +4460,7 @@ Private.handle_foursquare = function(params, callback) {
 
 
                 } else {
-                    console.log("GETTING SELF");
                     service.foursquare.get("https://api.foursquare.com/v2/users/self?oauth_token=" + access_token + "&v=" + foursquare.version, access_token, function(error, data, response) {
-                        console.log("GOT SELF", error, data, response);
                         if (error) {
 
                             Private.publish('unauthorized', {
@@ -4771,9 +4730,7 @@ Public.prototype.secrets = function(path) {
     if (!!evernote) {
         //service.evernote = new OAuthEcho( "https://sandbox.evernote.com/oauth", "https://sandbox.evernote.com/oauth", evernote.id, evernote.secret, "1.0a", evernote.callback || '', "HMAC-SHA1" );
     }
-}
 };
-
 
 Public.prototype.logout = function(data, callback) {
     Private.publish('logging_out', {
@@ -4830,7 +4787,6 @@ Public.prototype.login = function(data, callback) {
         'data': data,
         'callback': callback
     });
-    console.log("LOGGING IN ", data);
     if ('twitter' == data.service) {
         Private.handle_twitter(data, callback);
     } else if ('google' === data.service) {
