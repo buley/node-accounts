@@ -4554,6 +4554,8 @@ Private.publish = function( event_name, value ) {
 
 Public.prototype.secrets = function( path ) {
 
+	var fs = require('fs');
+	
 	if( 'undefined' === typeof path || null === path ) {
 		throw new Error( 'Keypath cannot be empty' );
 	}
