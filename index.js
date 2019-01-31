@@ -4584,7 +4584,6 @@ Public.prototype.unsubscribe = function(event_name, id) {
 };
 
 Private.publish = function(event_name, value) {
-
     if ('undefined' === typeof event_name || null === event_name) {
         return false;
     }
@@ -4611,7 +4610,7 @@ Public.prototype.secrets = function(path) {
         throw new Error('Keypath cannot be empty');
     }
 
-    var auth_keys = ('string' === typeof path) ? fs.readFileSync(path, 'utf8') : path,
+    var auth_keys = ('string' === typeof path) ? JSON.parse(fs.readFileSync(path, 'utf8')) : path,
         twitter = auth_keys.twitter,
         facebook = auth_keys.facebook,
         google = auth_keys.google,
