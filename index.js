@@ -595,7 +595,6 @@ Private.handle_linkedin = function(params, callback) {
 
         });
     } else {
-
         service.linkedin.getOAuthRequestToken(function(error, oauth_request_token, oauth_request_token_secret, oauth_authorize_url, additionalParameters) {
 
             if (error) {
